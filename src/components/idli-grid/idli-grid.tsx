@@ -1,4 +1,4 @@
-import {Component, Prop, h, Element, Watch} from '@stencil/core';
+import {Component, Prop, h, Element, Watch, Event, EventEmitter} from '@stencil/core';
 
 @Component({
     tag: 'idli-grid',
@@ -7,35 +7,45 @@ import {Component, Prop, h, Element, Watch} from '@stencil/core';
 })
 export class IdliGrid {
 
+    /**
+     * The grid columns configuration.
+     * Sample [{"name":"name","label":"Name","width":300,"fixed":true},{"name":"age","label":"Age"},{"name":"eyeColor","label":"Eye Color","width":500}].
+     */
     @Prop() columnConfig: any[] | string = [];
     private _columnConfig: any[];
+
     @Watch('columnConfig')
     columnConfigWatcher(newValue: any[] | string) {
         if (typeof newValue === 'string') {
             this._columnConfig = JSON.parse(newValue);
-        }
-        else {
+        } else {
             this._columnConfig = newValue;
         }
     }
 
     @Prop() data: any[] | string = [];
     private _data: any[];
+
     @Watch('data')
     dataWatcher(newValue: any[] | string) {
         if (typeof newValue === 'string') {
             this._data = JSON.parse(newValue);
-        }
-        else {
+        } else {
             this._data = newValue;
         }
     }
+
+    @Event() cellClicked: EventEmitter;
 
     @Element() private element: HTMLElement;
 
     componentWillLoad() {
         this.columnConfigWatcher(this.columnConfig);
         this.dataWatcher(this.data);
+    }
+
+    handleCellClick(event: any, row: any, col: any) {
+        this.cellClicked.emit({event, record: row, column: col});
     }
 
     handleScroll(ev) {
@@ -47,7 +57,7 @@ export class IdliGrid {
         const movedBy = ev.target.getBoundingClientRect().x - $bodyRightPanel.getBoundingClientRect().x;
         $headerPanel.style.top = (ev.target.getBoundingClientRect().y - $bodyPanel.getBoundingClientRect().y) + 'px';
         $leftPanels.forEach(function ($leftPanel: HTMLElement) {
-           $leftPanel.style.left = movedBy + 'px';
+            $leftPanel.style.left = movedBy + 'px';
         });
     }
 
@@ -103,7 +113,8 @@ export class IdliGrid {
                                     let colWidth = 300;
                                     if (col.width)
                                         colWidth = col.width;
-                                    const colEl = <div class="col" style={{width: colWidth + "px"}}>{row[col.name] ? row[col.name] : ''}</div>;
+                                    const colEl = <div class="col" style={{width: colWidth + "px"}}
+                                                       onClick={(evt) => that.handleCellClick(evt, row, col)}>{row[col.name] ? row[col.name] : ''}</div>;
                                     if (col.fixed)
                                         bodyLeftRow.push(colEl);
                                     else
@@ -118,7 +129,7 @@ export class IdliGrid {
                                     <div class="left-panel" style={{width: totalLeftPanelWidth + "px"}}>
                                         <div class="table">
                                             {
-                                                bodyLeftPanel.map((row) =>  <div class="row">{row}</div>)
+                                                bodyLeftPanel.map((row) => <div class="row">{row}</div>)
                                             }
                                         </div>
                                     </div>

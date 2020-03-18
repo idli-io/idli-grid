@@ -11,6 +11,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface IdliGrid {
+    /**
+    * The grid columns configuration. Sample [{"name":"name","label":"Name","width":300,"fixed":true},{"name":"age","label":"Age"},{"name":"eyeColor","label":"Eye Color","width":500}].
+    */
     'columnConfig': any[] | string;
     'data': any[] | string;
   }
@@ -31,8 +34,12 @@ declare global {
 
 declare namespace LocalJSX {
   interface IdliGrid {
+    /**
+    * The grid columns configuration. Sample [{"name":"name","label":"Name","width":300,"fixed":true},{"name":"age","label":"Age"},{"name":"eyeColor","label":"Eye Color","width":500}].
+    */
     'columnConfig'?: any[] | string;
     'data'?: any[] | string;
+    'onCellClicked'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {
