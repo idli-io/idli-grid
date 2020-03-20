@@ -1,4 +1,4 @@
-import {Component, Prop, h, Element, Watch, Event, EventEmitter} from '@stencil/core';
+import {Component, Prop, h, Element, Watch, Event, EventEmitter, State} from '@stencil/core';
 
 @Component({
     tag: 'idli-grid',
@@ -39,6 +39,8 @@ export class IdliGrid {
 
     @Element() private element: HTMLElement;
 
+    @State() private hoverRecord: any;
+
     componentWillLoad() {
         this.columnConfigWatcher(this.columnConfig);
         this.dataWatcher(this.data);
@@ -59,6 +61,10 @@ export class IdliGrid {
         $leftPanels.forEach(function ($leftPanel: HTMLElement) {
             $leftPanel.style.left = movedBy + 'px';
         });
+    }
+
+    handleMouseOver(row: any) {
+        this.hoverRecord = row;
     }
 
 
@@ -113,8 +119,14 @@ export class IdliGrid {
                                     let colWidth = 300;
                                     if (col.width)
                                         colWidth = col.width;
-                                    const colEl = <div class="col" style={{width: colWidth + "px"}}
-                                                       onClick={(evt) => that.handleCellClick(evt, row, col)}>{row[col.name] ? row[col.name] : ''}</div>;
+                                    const colEl = <div class={"col " + (that.hoverRecord === row ? 'col-hover' : '')} style={{width: colWidth + "px"}}
+                                                       onMouseOver={() => that.handleMouseOver(row)}
+                                                       onClick={(evt) => that.handleCellClick(evt, row, col)}>
+                                        <div class="col-content"
+                                             style={{width: (colWidth - 24 /* remove padding */) + "px"}}>
+                                            {row[col.name] ? row[col.name] : ''}
+                                        </div>
+                                    </div>;
                                     if (col.fixed)
                                         bodyLeftRow.push(colEl);
                                     else

@@ -64,10 +64,15 @@ $body-padding-top: 20px + 2 * $col-padding;
 
     .body .row .col {
       background: white;
-    }
-
-    .body .row:hover .col {
-      background: #e6f7ff;
+      .col-content {
+        min-height: 21px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &.col-hover {
+        background: #e6f7ff;
+      }
     }
 
 

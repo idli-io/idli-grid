@@ -3,7 +3,7 @@
 ## Using this component
 
 ### Script tag
-- Put a script tag similar to this `<script src='https://unpkg.com/@idli/idli-grid@0.6.0/dist/idli-grid.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/@idli/idli-grid@0.6.5/dist/idli-grid.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
@@ -23,7 +23,7 @@
 ```
 <custom-element-demo>
   <template>
-    <script src='https://unpkg.com/@idli/idli-grid@0.6.0/dist/idli-grid.js'></script>
+    <script src='https://unpkg.com/@idli/idli-grid@0.6.5/dist/idli-grid.js'></script>
     <div style="width: 80%">
           <idli-grid
                   column-config='[{"name":"name","label":"Name","width":300,"fixed":true},{"name":"age","label":"Age"},{"name":"eyeColor","label":"Eye Color","width":500},{"name":"company","label":"Company","width":500},{"name":"email","label":"Email","width":500}, {"name":"address","label":"Address","width":1000}]'
