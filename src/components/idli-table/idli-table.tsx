@@ -98,9 +98,7 @@ export class IdliTable {
     handleSelectChange(selectedRowKeys: any) {
         const oldValue = this.selectedRowKeys;
         this.selectedRowKeys = selectedRowKeys;
-
-        console.log({oldValue: this.getKeys(oldValue), newValue: this.getKeys(this.selectedRowKeys)});
-        this.selectChange.emit({oldValue, newValue: this.selectedRowKeys});
+        this.selectChange.emit({oldValue: this.getKeys(oldValue), newValue: this.getKeys(this.selectedRowKeys)});
     }
 
     getTableHeaderDetails() {

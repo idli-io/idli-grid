@@ -29,6 +29,10 @@
             <pre id="record"></pre>
         </div>
         <div><b>Column :</b> <span id="column"></span></div>
+        <br/>
+        <div><b>Selected Rows :</b> <span id="selected-rows"></span></div>
+
+        <br/>
         <div>Check console for full event detail.</div>
     </div>
 </div>
@@ -37,6 +41,10 @@
         console.log(evt.detail);
         document.getElementById('record').innerText = JSON.stringify(evt.detail.record, null, 3);
         document.getElementById('column').innerText = evt.detail.column.label;
+    });
+    document.getElementById('grid').addEventListener('selectChange', function (evt) {
+        console.log(evt.detail);
+        document.getElementById('selected-rows').innerText = JSON.stringify(evt.detail.newValue);
     })
 </script>
 
