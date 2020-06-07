@@ -1,4 +1,4 @@
-# idli-grid
+# idli-table
 
 
 

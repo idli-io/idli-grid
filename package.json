@@ -1,7 +1,7 @@
 {
-  "name": "@idli/idli-grid",
-  "version": "0.6.6",
-  "description": "Idli Grid",
+  "name": "@idli/idli-table",
+  "version": "0.1.0",
+  "description": "Idli Table",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/idli-grid/idli-grid.js",
+  "unpkg": "dist/idli-table/idli-table.js",
   "files": [
     "dist/",
     "loader/"
@@ -30,11 +30,11 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idli-io/idli-grid.git"
+    "url": "git+https://github.com/idli-io/idli-table.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/idli-io/idli-grid/issues"
+    "url": "https://github.com/idli-io/idli-table/issues"
   },
-  "homepage": "https://github.com/idli-io/idli-grid#readme"
+  "homepage": "https://github.com/idli-io/idli-table#readme"
 }
