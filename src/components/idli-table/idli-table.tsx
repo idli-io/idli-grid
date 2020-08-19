@@ -54,35 +54,21 @@ export class IdliTable {
 
     @State() private selectedRowKeys: {} = {};
 
-    async loadScript(src) {
-        return new Promise((resolve) => {
-            const script = document.createElement('script');
-            document.head.appendChild(script);
-            script.src = src;
-            script.setAttribute("nomodule", "");
-            script.addEventListener('load', () => {
-                resolve();
-            });
-        });
-    }
-
     async loadScriptModule(src) {
         return new Promise((resolve) => {
             const script = document.createElement('script');
-            document.head.appendChild(script);
             script.src = src;
             script.type = "module";
             script.addEventListener('load', () => {
                 resolve();
             });
+            document.head.appendChild(script);
         });
     }
 
     async componentWillLoad() {
-        if (this.selectionType === 'checkbox' && !customElements.get('idli-checkbox')) {
-            //await this.loadScriptModule("https://unpkg.com/@idli/idli-checkbox@0.1.8/dist/idli-checkbox/idli-checkbox.esm.js");
-            await this.loadScript("https://unpkg.com/@idli/idli-checkbox@0.1.8/dist/idli-checkbox.js");
-        }
+        if (this.selectionType === 'checkbox' && !customElements.get('idli-checkbox'))
+            await this.loadScriptModule("https://unpkg.com/@idli/idli-checkbox@0.1.8/dist/idli-checkbox/idli-checkbox.esm.js");
         this.columnConfigWatcher(this.columnConfig);
         this.dataWatcher(this.data);
     }
