@@ -167,7 +167,12 @@ export class IdliTable {
                     const colEl = <div class={"col " + (that.hoverRecord === row ? 'col-hover' : '')}
                                        style={{width: colWidth + "px", height: rowHeight + "px"}}
                                        onMouseOver={() => that.handleMouseOver(row)}
-                                       onClick={(evt) => that.handleCellClick(evt, row, col)}>
+                                       onClick={(evt) => {
+                                           const selection = window.getSelection();
+                                           if(selection.type != "Range") {
+                                               that.handleCellClick(evt, row, col);
+                                           }
+                                       }}>
                         <div class="col-content"
                              style={{width: (colWidth - 24 /* remove padding */) + "px"}}>
                             {row[col.name] ? row[col.name] : ''}
